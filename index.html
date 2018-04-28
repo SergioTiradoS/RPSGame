@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script type="text/javascript">
+        var vHumanName = prompt("What's your name?");
+        if(vHumanName){
+            if(vHumanName==''){
+            vHumanName = "The Puny Human";
+            }
+        }else{
+            vHumanName = "The Puny Human";
+        }
+
+        var vVictoryWin = prompt("How many victorys to win?");
+        if(vVictoryWin){
+            if(vVictoryWin==''){
+                vVictoryWin = 3;
+            }else if(isNaN(vVictoryWin)){
+                vVictoryWin = 3;
+            }
+        }else{
+            vVictoryWin = 3;
+        }
+    </script>
+</head>
+<body>
+        <div class="row">
+                <div id="GameTitle" class="col-lg text-center">
+                 <h1 class="">RPS Game</h1>
+                </div>
+        </div>
+        <div class="row">
+                <div id="HumanName" class="col-lg text-center">
+                    <span>
+                        <script type="text/javascript">
+                            document.write("<h2>" + vHumanName + "</h2>");
+                            
+                        </script>
+                    </span>
+                </div>
+                <div id="ComputerName" class="col-lg text-center">
+                    <span>
+                        <h2>HAL9000</h2>
+                    </span>
+                </div>
+        </div>
+        <div class="row table-cell">
+                <div id="HumanChoice" class="col-lg text-center align-items-center">
+                    <span>
+                        <img id="HumanChoiceImg" src="Images/p.png" alt="">
+                    </span>
+                </div>
+                <div id="ComputerChoice" class="col-lg text-center align-items-center">
+                    <span>
+                        <img id="ComputerChoiceImg" src="Images/p.png" alt="">
+                    </span>
+                </div>
+        </div>
+        <div class="row">
+                <div id="HumanScore"class="col-lg text-center">
+                        <h1>
+                            <span id="HumanScoreText">
+                                0
+                            </span>
+                        </h1>
+                </div>
+                <div id="ComputerScore"class="col-lg text-center">
+                        <h1>
+                            <span id="ComputerScoreText">
+                                0
+                            </span>
+                        </h1>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-lg">
+                  
+                </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+           
+            var computerChoices = ["r", "p", "s"];
+            var vHumanChoice = ' ';
+            var vHumanVictories = 0;
+            var vComputerVictories = 0;
+      
+            document.onkeyup = function() {
+                vHumanChoice = event.key;
+
+
+                    if(vHumanChoice.toString()=="p" || vHumanChoice.toString()=="r" ||vHumanChoice.toString()=="s"){
+                        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                        
+                        //Show the human choice image
+                        var image2 = document.getElementById('HumanChoiceImg');
+
+                        if(vHumanChoice.toString()=="p"){
+                            image2.src = 'Images/p.png';
+                        }else if(vHumanChoice.toString()=="r"){
+                            image2.src = 'Images/r.png';
+                        }else {
+                            image2.src = 'Images/s.png';
+                        }
+
+                        //Show the computer choice image
+                        var image = document.getElementById('ComputerChoiceImg');
+                        if(computerGuess.toString()=="p"){
+                            image.src = 'Images/p.png';
+                        }else if(computerGuess.toString()=="r"){
+                            image.src = 'Images/r.png';
+                        }else {
+                            image.src = 'Images/s.png';
+                        }
+
+                        var vHumanScoreText = document.getElementById("HumanScoreText");
+                        var vComputerScoreText = document.getElementById("ComputerScoreText");
+
+                        if(vHumanChoice.toString()=="r" && computerGuess.toString()=="s"){
+                            //sum 1 to human score
+                            vHumanScoreText.textContent = Number(vHumanScoreText.textContent.valueOf())+Number(1);
+                            vHumanVictories++;
+                        }else if(vHumanChoice.toString()=="r" && computerGuess.toString()=="p"){
+                            //sum 1 to computer score
+                            vComputerScoreText.textContent = Number(vComputerScoreText.textContent.valueOf())+Number(1);
+                            vComputerVictories++;
+                        }else if(vHumanChoice.toString()=="p" && computerGuess.toString()=="r"){
+                            //sum 1 to human score
+                            vHumanScoreText.textContent = Number(vHumanScoreText.textContent.valueOf())+Number(1);
+                            vHumanVictories++;
+                        }else if(vHumanChoice.toString()=="p" && computerGuess.toString()=="s"){
+                            //sum 1 to computer score
+                            vComputerScoreText.textContent = Number(vComputerScoreText.textContent.valueOf())+Number(1);
+                            vComputerVictories++;
+                        }if(vHumanChoice.toString()=="s" && computerGuess.toString()=="p"){
+                            //sum 1 to human score
+                            vHumanScoreText.textContent = Number(vHumanScoreText.textContent.valueOf())+Number(1);
+                            vHumanVictories++;
+                        }else if(vHumanChoice.toString()=="s" && computerGuess.toString()=="r"){
+                            //sum 1 to computer score
+                            vComputerScoreText.textContent = Number(vComputerScoreText.textContent.valueOf())+Number(1);
+                            vComputerVictories++;
+                        /*}else if(vHumanChoice.toString()==computerGuess.toString()){
+                            alert("It's a tie!");*/
+                        }
+                
+                    }else{
+                        alert('Please choose [r]ock, [p]aper or [s]cissors: ' + vHumanChoice)
+                    }
+                    
+               
+
+                if(vHumanVictories==vVictoryWin){
+                    alert('And the winner is ' + vHumanName);
+                    location.reload();
+
+                }else if(vComputerVictories==vVictoryWin){
+                    alert('And the winner is HAL9000');
+                    location.reload();
+                }
+                
+            };
+          </script>
+    </body>
+</html>
